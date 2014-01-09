@@ -169,7 +169,6 @@ class WordPress_Max_Submit_Protect
      */
     public function wp_head_action()
     {
-$this->current_limit = 2;
         // Translate the message the administrator will see if they submit a big form.
         // Also encode it to a JavaScript inline string, except for the newline in the middle.
         // DOn't translate any of the {fields}.
