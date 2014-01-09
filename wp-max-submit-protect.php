@@ -5,9 +5,9 @@
  */
 /*
 Plugin Name: WordPress Max Submit Protect
-Plugin URI: http://www.academe.co.uk/
+Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
-Version: 1.0.0
+Version: 1.0.1
 Author: Academe Computing
 Author URI: http://www.academe.co.uk/
 License: GPLv2 or later
@@ -29,13 +29,19 @@ class WordPress_Max_Submit_Protect
      * The default limit we will use if no server settings can be found.
      */
 
-    protected static $default_limit = 1000;
+    protected $default_limit = 1000;
 
     /**
      * The limit currently set on the server.
      */
 
-    protected static $current_limit = null;
+    protected $current_limit = null;
+
+    /**
+     * The filename of the plugin, needed to add info to the admin plugin links.
+     */
+
+    protected $plugin_basename = null;
 
     /**
      * Return the singleton.
@@ -80,6 +86,29 @@ class WordPress_Max_Submit_Protect
         // Add inline JS to the head.
         //add_action('wp_head', 'wp_head_action');
         add_action('admin_head', array($this, 'wp_head_action'));
+
+        // Add some dyanamic information to the plugins page links for this plugin.
+        add_filter('plugin_action_links', array($this, 'plugin_action_links_filter'), 10, 2);
+    }
+
+    /**
+     * List the field limit in the plugins page, along with the links.
+     */
+    public function plugin_action_links_filter($links, $file)
+    {
+        if ( ! isset($this->plugin_basename)) {
+            $this->plugin_basename = plugin_basename(__FILE__);
+        }
+
+        //echo " $file==".plugin_basename(__FILE__);
+        if ($file == $this->plugin_basename) {
+            // Only an anchor is correctly formatted, otherwise the text is too light.
+            $links[] = sprintf(
+                __('<a title="The current limit set by the server">Field limit: %d</a>'), $this->current_limit
+            );
+        }
+
+        return $links;
     }
 
     /**
@@ -117,7 +146,7 @@ class WordPress_Max_Submit_Protect
     {
         // Get the plugin version for attaching to the assets.
         // We do this to blow away any browser/proxy caches when the plugin is updated.
-        $plugin_metadata = get_plugin_data( __FILE__);
+        $plugin_metadata = get_plugin_data(__FILE__);
         $version = (!empty($plugin_metadata['Version']) ? $plugin_metadata['Version'] : '1.0.0');
 
         // Enqueue the jQuery plugin.
@@ -140,11 +169,25 @@ class WordPress_Max_Submit_Protect
      */
     public function wp_head_action()
     {
+$this->current_limit = 2;
+        // Translate the message the administrator will see if they submit a big form.
+        // Also encode it to a JavaScript inline string, except for the newline in the middle.
+        // DOn't translate any of the {fields}.
+        $too_many_message = str_replace('{newline}', '\n', json_encode(__(
+            'This form has too many fields ({form_count}) for the server to accept (max {max_count})'
+            . "{newline}"
+            . 'Data may be lost if you submit. Are you sure you want to go ahead?'
+        )));
+
         // Apply the limit checker to all forms on the page.
         $script = <<<ENDHTML
             <script type="text/javascript">
+                /* Plugin: WordPress Max Submit Protect */
                 jQuery(document).ready(function($) {
-                    $('form').maxSubmit({max_count: {$this->current_limit}});
+                    $('form').maxSubmit({
+                        max_count: {$this->current_limit},
+                        max_exceeded_message: {$too_many_message}
+                    });
                 })
             </script>
 ENDHTML;
