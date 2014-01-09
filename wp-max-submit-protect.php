@@ -7,7 +7,7 @@
 Plugin Name: WordPress Max Submit Protect
 Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
-Version: 1.0.1
+Version: 1.0.2
 Author: Academe Computing
 Author URI: http://www.academe.co.uk/
 License: GPLv2 or later
