@@ -7,7 +7,7 @@
 Plugin Name: WordPress Max Submit Protect
 Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
-Version: 1.0.2
+Version: 1.0.3
 Author: Academe Computing
 Author URI: http://www.academe.co.uk/
 License: GPLv2 or later
@@ -100,11 +100,11 @@ class WordPress_Max_Submit_Protect
             $this->plugin_basename = plugin_basename(__FILE__);
         }
 
-        //echo " $file==".plugin_basename(__FILE__);
         if ($file == $this->plugin_basename) {
             // Only an anchor is correctly formatted, otherwise the text is too light.
             $links[] = sprintf(
-                __('<a title="The current limit set by the server">Field limit: %d</a>'), $this->current_limit
+                __('<a title="The current limit set by the server">Field limit: %s</a>'),
+                (!empty($this->current_limit) ? $this->current_limit : __('unknown'))
             );
         }
 
@@ -159,19 +159,17 @@ class WordPress_Max_Submit_Protect
             false
         );
         wp_enqueue_script('jquery.maxsubmit');
-
-        // Enqueue the initialisation of the form checker.
-        // Apply it to all forms.
     }
 
     /**
      * Add inline JS to the head.
+     * So far as I can tell, there is no way to enqueue this.
      */
     public function wp_head_action()
     {
         // Translate the message the administrator will see if they submit a big form.
         // Also encode it to a JavaScript inline string, except for the newline in the middle.
-        // DOn't translate any of the {fields}.
+        // Don't translate any of the {fields}.
         $too_many_message = str_replace('{newline}', '\n', json_encode(__(
             'This form has too many fields ({form_count}) for the server to accept (max {max_count})'
             . "{newline}"
