@@ -1,10 +1,9 @@
 <?php
 /**
- * @package WordPress-Max-Submit-Protect
- * Similar to http://docs.woothemes.com/document/catalog-visibility-options/
+ * @package WP-Max-Submit-Protect
  */
 /*
-Plugin Name: WordPress Max Submit Protect
+Plugin Name: WP Max Submit Protect
 Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
 Version: 1.0.3
@@ -14,7 +13,7 @@ License: GPLv2 or later
 */
 
 /*
- * TODO:
+ * TODO: TBC
  */
 
 class WordPress_Max_Submit_Protect

@@ -1,4 +1,4 @@
-=== WordPress Max Submit Protect ===
+=== WP Max Submit Protect ===
 Contributors: judgej
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B4STZL8F5WHK6
 Tags: woocommerce, forms, data-integrity
