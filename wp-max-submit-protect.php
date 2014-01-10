@@ -16,7 +16,7 @@ License: GPLv2 or later
  * TODO: TBC
  */
 
-class WordPress_Max_Submit_Protect
+class WP_Max_Submit_Protect
 {
     /**
      * Singleton instance.
@@ -195,5 +195,5 @@ ENDHTML;
 }
 
 // Initialise and instantiate the plugin class.
-WordPress_Max_Submit_Protect::getInstance();
+WP_Max_Submit_Protect::getInstance();
 
