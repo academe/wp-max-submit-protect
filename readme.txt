@@ -19,8 +19,8 @@ Most applications don't check whether they received everything, and so data can 
 A WooCommerce product with 40 variations can have over 1300 submitted form items, and when saving the product you have no idea that much of that data is being discarded.
 
 Luckily [the maximum number of accepted parameters can be changed in php.ini](http://docs.woothemes.com/document/problems-with-large-amounts-of-data-not-saving-variations-rates-etc/)
-The problem is, many site owners have no idea this needs to be done until it is too late and their WooCommerce
-store has lost half its product variations.
+The problem is, many site owners have no idea this needs to be done until it is too late and their application,
+for example their WooCommerce store, has lost half its product variations.
 
 To protect yourself and make sure the server limit does not catch
 you unawares, install this plugin and let it run in the background. Each time you try to submit a form in the
@@ -46,9 +46,20 @@ Please let me know how this plugin works for you, whether you like it, and how i
 
 == Installation ==
 
-1. Upload wp-max-submit-protect/ to the `/wp-content/plugins/` directory or wp-max-submit-protect-x.y.z.zip through the "Add Plugins" administration page, or install from wordpress.org
+Upload wp-max-submit-protect/ to the `/wp-content/plugins/` directory or wp-max-submit-protect-x.y.z.zip through the "Add Plugins" administration page,
+or install from wordpress.org by searching for "WP Max Submit Protect".
 
 == Frequently asked questions ==
+
+= Who is this plugin for? =
+
+Any WordPress site that uses forms which have lots of fields. For example, a WooCommerce site containing products
+with many variations.
+
+= Is this just for WooCommerce sites? =
+
+No! Any WordPress application that submits big forms can benefit from the protection this plugin offers.
+Sites with multi-page forms implemented through GravityForms could use this.
 
 = Are there any configuration options? =
 
