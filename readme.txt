@@ -27,13 +27,7 @@ you unawares, install this plugin and let it run in the background. Each time yo
 admin pages (e.g. updating a WooCommerce product with lots of variatrions) this plugin will check that the
 number of form parameters you are about to submit does not exceed the server limit. If it does, then it
 will inform you and give you the opportunity to postpone the submit while you increase the server settings.
-The link above describes how to set the limits on the server. The PHP ini settings that could affect the
-data in large forms are:
-
-* max_input_vars
-* suhosin.get.max_vars
-* suhosin.post.max_vars
-* suhosin.request.max_vars
+The link above describes how to set the limits on the server. 
 
 This plugin has been tested against PHP5.4 but is written to be compatible with PHP5.3. The project repository is here:
 
@@ -63,7 +57,17 @@ Sites with multi-page forms implemented through GravityForms could use this.
 
 = Are there any configuration options? =
 
-Through the plugin no; you just install and go. There may be some server settings to update, and the purpose of this plugin is to warn you about those.
+Through the plugin no; you just install and go. There may be some server settings to update, and the purpose
+of this plugin is to warn you about those.
+
+= What are the PHP.ini settings that may need to be changed? =
+
+The PHP ini settings that could affect the data in large forms are:
+
+* max_input_vars
+* suhosin.get.max_vars
+* suhosin.post.max_vars
+* suhosin.request.max_vars
 
 == Screenshots ==
 
