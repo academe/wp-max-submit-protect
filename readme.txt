@@ -54,7 +54,6 @@ Sites with multi-page forms implemented through GravityForms could use this.
 
 = Are there any configuration options? =
 
-<<<<<<< HEAD
 Through the plugin no; you just install and go. There may be some server settings to update,
 and the purpose of this plugin is to warn you about those.
 
@@ -66,7 +65,6 @@ The PHP ini settings that could affect the data in large forms are:
 * suhosin.get.max_vars
 * suhosin.post.max_vars
 * suhosin.request.max_vars
-<<<<<<< HEAD
 
 You may have all, some or none of these settings configured. If none are set, then max_input_vars
 will default to 1000. This is certainly too low for some e-commerce plugins.
@@ -77,6 +75,9 @@ will default to 1000. This is certainly too low for some e-commerce plugins.
 2. 
 
 == Changelog ==
+
+= Version 1.0.4 =
+* Update the jQuery maxsubmit plugin to 1.1.0
 
 = Version 1.0.3 =
 * Issue #1 (this readme.txt)
