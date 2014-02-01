@@ -27,20 +27,11 @@ you unawares, install this plugin and let it run in the background. Each time yo
 admin pages (e.g. updating a WooCommerce product with lots of variatrions) this plugin will check that the
 number of form parameters you are about to submit does not exceed the server limit. If it does, then it
 will inform you and give you the opportunity to postpone the submit while you increase the server settings.
-The link above describes how to set the limits on the server. The PHP ini settings that could affect the
-data in large forms are:
-
-* max_input_vars
-* suhosin.get.max_vars
-* suhosin.post.max_vars
-* suhosin.request.max_vars
+The link above describes how to set the limits on the server. More details in the FQAs.
 
 This plugin has been tested against PHP5.4 but is written to be compatible with PHP5.3. The project repository is here:
 
 [https://github.com/academe/wp-max-submit-protect](https://github.com/academe/wp-max-submit-protect)
-
-Changes have been made so that it works with PHP5.2 and has been reported as working.
-However, I work under at least 5.3 so some incompatibilities may creep in by accident from time-to-time - just report them and I will do my best to fix as quickly as possible.
 
 Please let me know how this plugin works for you, whether you like it, and how it can be improved.
 
@@ -52,7 +43,20 @@ Please let me know how this plugin works for you, whether you like it, and how i
 
 = Are there any configuration options? =
 
-Through the plugin no; you just install and go. There may be some server settings to update, and the purpose of this plugin is to warn you about those.
+Through the plugin no; you just install and go. There may be some server settings to update,
+and the purpose of this plugin is to warn you about those.
+
+=  What are the PHP ini settings? =
+
+The PHP ini settings that could affect the data in large forms are:
+
+* max_input_vars
+* suhosin.get.max_vars
+* suhosin.post.max_vars
+* suhosin.request.max_vars
+
+You may have all, some or none of these settings configured. If none are set, then max_input_vars
+will default to 1000. This is certainly too low for some e-commerce plugins.
 
 == Screenshots ==
 

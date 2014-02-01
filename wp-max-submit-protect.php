@@ -178,7 +178,7 @@ class WP_Max_Submit_Protect
         // Apply the limit checker to all forms on the page.
         $script = <<<ENDHTML
             <script type="text/javascript">
-                /* Plugin: WordPress Max Submit Protect */
+                /* Plugin: WP Max Submit Protect */
                 jQuery(document).ready(function($) {
                     $('form').maxSubmit({
                         max_count: {$this->current_limit},
