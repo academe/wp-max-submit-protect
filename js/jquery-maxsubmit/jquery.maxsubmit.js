@@ -1,7 +1,8 @@
 /**
- * Copyright 2013 Academe Computing Ltd
+ * Copyright 2013-2014 Academe Computing Ltd
  * Released under the MIT license
  * Author: Jason Judge <jason@academe.co.uk>
+ * Version: 1.1.0
  */
 /**
  * jquery.maxsubmit.js
@@ -16,8 +17,6 @@
  * parameters (looking at you WooCommerce). This aims to provide some
  * level of protection.
  *
- * TODO: we should look at GET variables on the form URL, because they also
- * get counted on the "suhosin.request.max_vars" setting, if used.
  */
 
 (function($) {
@@ -35,7 +34,8 @@
 				// Can use {max_count} as a placeholder for the permitted maximum
 				// and {form_count} for the counted form items.
 
-				max_exceeded_message: 'This form has too many fields for the server to accept.\n'
+				max_exceeded_message:
+					'This form has too many fields for the server to accept.\n'
 					+ ' Data may be lost if you submit. Are you sure you want to go ahead?',
 
 				// The function that will display the confirm message.
@@ -61,20 +61,20 @@
 					// submitted to the server.
 
 					// Text fields and submit buttons will all post one parameter.
-					var form_count = $('input:text, input:submit, input:password, textarea', this).length;
+					var form_count = $('input:text:enabled, input:submit:enabled, input:password:enabled, textarea:enabled', this).length;
 
 					// Checkboxes will post only if checked.
-					$('input:checkbox', this).each(function() {
+					$('input:checkbox:enabled', this).each(function() {
 						if (this.checked) form_count++;
 					});
 
 					// Single-select lists will always post one value.
-					$('select:not([multiple])', this).each(function() {
+					$('select:enabled:not([multiple])', this).each(function() {
 						form_count++;
 					});
 
 					// Multi-select lists will post one parameter for each selected item.
-					$('select[multiple]', this).each(function() {
+					$('select:enabled[multiple]', this).each(function() {
 						// The select item value is null if no options are selected.
 						var select = $(this).val();
 						if (select !== null) form_count += select.length;
@@ -83,7 +83,7 @@
 					// Each radio button group will post one parameter.
 					// Count the radio groups
 					var rgroups = [];
-					$('input:radio').each(function(index, el) {
+					$('input:enabled:radio').each(function(index, el) {
 						var i;
 						for(i = 0; i < rgroups.length; i++) {
 							if (rgroups[i] == $(el).attr('name')) return;

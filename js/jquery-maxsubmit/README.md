@@ -82,8 +82,22 @@ initialisation, and will return 1000 by default on most PHP servers.
 
 A simple demo (index.php in this project) is running here: [http://www.acadweb.co.uk/maxsubmit/]
 
-## Future Development
+## WordPress Plugin
 
-The jQuery plugin and the PHP function are the two building blocks. I intend to wrap them into a
-simple WordPress plugin next. Just install it along with your WooCommerce plugin, and it will stop
-you breaking your products that have dozens of variations. Christmas may get in the way first ;-)
+This submit checker is wrapped into a WordPress plugin here:
+https://github.com/academe/wp-max-submit-protect
+Just install the plugin (binary zips are available under the releases) and it will protect
+all admin forms from being submitted if the server will not accept the number of form items
+being POSTed.
+
+## jQuery Plugins
+
+The latest version is available here:
+http://plugins.jquery.com/jquery-maxsubmit/
+
+## History
+
+1.1.0 Issue #2 reported by @Bubbendorf Update to demo to demonstrate fixes.
+1.0.2 Fixed manifest; first release to plugins.jquery.com
+1.0.1 First attempt to get it into plugins.jquery.com
+1.0.0 First release, used in WP plugin.
