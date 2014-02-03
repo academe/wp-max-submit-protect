@@ -6,7 +6,7 @@
 Plugin Name: WP Max Submit Protect
 Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
-Version: 1.0.4
+Version: 1.0.5
 Author: Academe Computing
 Author URI: http://www.academe.co.uk/
 License: GPLv2 or later
@@ -133,7 +133,12 @@ class WP_Max_Submit_Protect
         $ini = array_filter($ini, 'is_numeric');
 
         // Find the smallest of them all.
-        $lowest_limit = min($ini);
+        // Ticket #7: A PHP warning will be issued if min() is run against an empty array.
+        if ( ! empty($ini)) {
+            $lowest_limit = min($ini);
+        } else {
+            $lowest_limit = $default;
+        }
 
         return ($lowest_limit === false ? $default : $lowest_limit);
     }
