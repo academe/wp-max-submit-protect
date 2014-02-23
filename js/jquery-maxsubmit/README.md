@@ -97,7 +97,9 @@ http://plugins.jquery.com/jquery-maxsubmit/
 
 ## History
 
-1.1.0 Issue #2 reported by @Bubbendorf Update to demo to demonstrate fixes.
-1.0.2 Fixed manifest; first release to plugins.jquery.com
-1.0.1 First attempt to get it into plugins.jquery.com
-1.0.0 First release, used in WP plugin.
+1.1.2 Updated metadata for plugins.jquery.com  
+1.1.1 Fixed syntax error messaing with Chrome  
+1.1.0 Issue #2 reported by @Bubbendorf Update to demo to demonstrate fixes.  
+1.0.2 Fixed manifest; first release to plugins.jquery.com  
+1.0.1 First attempt to get it into plugins.jquery.com  
+1.0.0 First release, used in WP plugin.  

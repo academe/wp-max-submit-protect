@@ -7,7 +7,7 @@
 		"maxinputvars",
 		"suhosin"
 	],
-	"version": "1.1.0",
+	"version": "1.1.2",
 	"author": {
 		"name": "Jason Judge",
 		"url": "https://github.com/judgej"
@@ -28,7 +28,7 @@
 	"bugs": "https://github.com/judgej/jquery-maxsubmit/issues",
 	"homepage": "https://github.com/judgej/jquery-maxsubmit",
 	"docs": "https://github.com/judgej/jquery-maxsubmit",
-	"download": "https://github.com/judgej/jquery-maxsubmit/archive/1.1.0.zip",
+	"download": "https://github.com/judgej/jquery-maxsubmit/archive/1.1.2.zip",
 	"dependencies": {
 		"jquery": ">=1.5"
 	}
