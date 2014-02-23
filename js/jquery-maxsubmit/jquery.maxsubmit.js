@@ -41,7 +41,8 @@
 				// The function that will display the confirm message.
 				// Replace this with something fancy such as jquery.ui if you wish.
 
-				confirm_display: function(form_count = '') {
+				confirm_display: function(form_count) {
+					if (typeof(form_count) === 'undefined') form_count = '';
 					return confirm(
 						settings
 							.max_exceeded_message
