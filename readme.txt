@@ -3,8 +3,8 @@ Contributors: judgej
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B4STZL8F5WHK6
 Tags: woocommerce, forms, data-integrity
 Requires at least: 3.6
-Tested up to: 3.8.0
-Stable tag: 1.0.5
+Tested up to: 3.8.1
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ will default to 1000. This is certainly too low for some e-commerce plugins.
 2. 
 
 == Changelog ==
+
+= Version 1.0.6 =
+* Fixed JS syntax error that Chrome was throwing up.
 
 = Version 1.0.5 =
 * Ticket #7 Suppress warning message if no options set at all on the server.
