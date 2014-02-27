@@ -2,7 +2,7 @@
  * Copyright 2013-2014 Academe Computing Ltd
  * Released under the MIT license
  * Author: Jason Judge <jason@academe.co.uk>
- * Version: 1.1.2
+ * Version: 1.1.3
  */
 /**
  * jquery.maxsubmit.js
@@ -61,8 +61,19 @@
 					// We have a form, so count up the form items that will be
 					// submitted to the server.
 
-					// Text fields and submit buttons will all post one parameter.
-					var form_count = $('input:text:enabled, input:submit:enabled, input:password:enabled, textarea:enabled', this).length;
+					// textarea fields count as one submitted field each.
+					var form_count = $('textarea:enabled', this).length;
+
+					// Input fields of all types except checkboxes and radio buttons will
+					// all post one parameter.
+					// reset inputs are not submitted to the server and files are handled
+					// separately.
+					form_count += $('input:enabled', this)
+						.not("[type='checkbox']")
+						.not("[type='radio']")
+						.not("[type='file']")
+						.not("[type='reset']")
+						.length;
 
 					// Checkboxes will post only if checked.
 					$('input:checkbox:enabled', this).each(function() {
@@ -81,7 +92,8 @@
 						if (select !== null) form_count += select.length;
 					});
 
-					// Each radio button group will post one parameter.
+					// Each radio button group will post one parameter, regardless of how many
+					// radio buttons a group contains.
 					// Count the radio groups
 					var rgroups = [];
 					$('input:enabled:radio').each(function(index, el) {

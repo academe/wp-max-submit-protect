@@ -97,6 +97,7 @@ http://plugins.jquery.com/jquery-maxsubmit/
 
 ## History
 
+1.1.3 Fixed count of HTML5 input elements  
 1.1.2 Updated metadata for plugins.jquery.com  
 1.1.1 Fixed syntax error messaing with Chrome  
 1.1.0 Issue #2 reported by @Bubbendorf Update to demo to demonstrate fixes.  
