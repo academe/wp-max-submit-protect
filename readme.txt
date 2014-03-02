@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, forms, data-integrity
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 1.0.7
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ will default to 1000. This is certainly too low for some e-commerce plugins.
 2. 
 
 == Changelog ==
+
+= Version 1.1.0 =
+* Upgraded jquery.maxsubmit.js to 1.2.1 containing some subtantial rewrites
 
 = Version 1.0.7 =
 * Upgraded jquery.maxsubmit.js to 1.1.3 to fix HTML5 input field matching

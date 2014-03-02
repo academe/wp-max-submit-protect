@@ -2,7 +2,7 @@
  * Copyright 2013-2014 Academe Computing Ltd
  * Released under the MIT license
  * Author: Jason Judge <jason@academe.co.uk>
- * Version: 1.1.3
+ * Version: 1.2.1
  */
 /**
  * jquery.maxsubmit.js
@@ -20,8 +20,13 @@
  */
 
 (function($) {
+	/**
+	 * Set a trigger on a form to pop up a warning if the fields to be submitted
+	 * exceed a specified maximum.
+	 * Usage: $('form#selector').maxSubmit({options});
+	 */
 	$.fn.maxSubmit = function(options) {
-		// this.each() is the wrapper for each selected group of checkboxes.
+		// this.each() is the wrapper for each form.
 		return this.each(function() {
 
 			var settings = $.extend({
@@ -61,49 +66,8 @@
 					// We have a form, so count up the form items that will be
 					// submitted to the server.
 
-					// textarea fields count as one submitted field each.
-					var form_count = $('textarea:enabled', this).length;
-
-					// Input fields of all types except checkboxes and radio buttons will
-					// all post one parameter.
-					// reset inputs are not submitted to the server and files are handled
-					// separately.
-					form_count += $('input:enabled', this)
-						.not("[type='checkbox']")
-						.not("[type='radio']")
-						.not("[type='file']")
-						.not("[type='reset']")
-						.length;
-
-					// Checkboxes will post only if checked.
-					$('input:checkbox:enabled', this).each(function() {
-						if (this.checked) form_count++;
-					});
-
-					// Single-select lists will always post one value.
-					$('select:enabled:not([multiple])', this).each(function() {
-						form_count++;
-					});
-
-					// Multi-select lists will post one parameter for each selected item.
-					$('select:enabled[multiple]', this).each(function() {
-						// The select item value is null if no options are selected.
-						var select = $(this).val();
-						if (select !== null) form_count += select.length;
-					});
-
-					// Each radio button group will post one parameter, regardless of how many
-					// radio buttons a group contains.
-					// Count the radio groups
-					var rgroups = [];
-					$('input:enabled:radio').each(function(index, el) {
-						var i;
-						for(i = 0; i < rgroups.length; i++) {
-							if (rgroups[i] == $(el).attr('name')) return;
-						}
-						rgroups.push($(el).attr('name'));
-					});
-					form_count += rgroups.length;
+					// For now, add one for the submit button.
+					var form_count = $(this).maxSubmitCount() + 1;
 
 					if (form_count > settings.max_count) {
 						// If the user cancels, then abort the form submit.
@@ -118,6 +82,77 @@
 			// Support chaining.
 			return this;
 		});
+	};
+
+	/**
+	 * Count the number of fields that will be posted in a form.
+	 * If return_elements is true, then an array of elements will be returned
+	 * instead of the count. This is handy for testing.
+	 * TODO: elements without names will not be submitted.
+	 * Another approach may be to get all input fields at once using $("form :input")
+	 * then knock out the ones that we don't want. That would keep the same order as the
+	 * items would be submitted.
+	 */
+	$.fn.maxSubmitCount = function(return_elements) {
+		// Text fields and submit buttons will all post one parameter.
+
+		// Find the textareas.
+		// These will count as one post parameter each.
+		var fields = $('textarea:enabled[name]', this).toArray();
+
+		// Find the basic textual input fields (text, email, number, date and similar).
+		// These will count as one post parameter each.
+		// We deal with checkboxes, radio buttons sparately.
+		// Checkboxes will post only if checked, so exclude any that are not checked.
+		// There may be multiple form submit buttons, but only one will be posted with the
+		// form, assuming the form has been submitted by the user with a button.
+		// An image submit will post two fields - an x and y coordinate.
+		fields = fields.concat(
+			$('input:enabled[name]', this)
+				// Data items that are handled later.
+				.not("[type='checkbox']:not(:checked)")
+				.not("[type='radio']")
+				.not("[type='file']")
+				.not("[type='reset']")
+				// Submit form items.
+				.not("[type='submit']")
+				.not("[type='button']")
+				.not("[type='image']")
+				.toArray()
+		);
+
+		// Single-select lists will always post one value.
+		fields = fields.concat(
+			$('select:enabled[name]', this)
+				.not('[multiple]')
+				.toArray()
+		);
+
+		// Multi-select lists will post one parameter for each selected option.
+		// The parent select is $(this).parent() with its name being $(this).parent().attr('name')
+		$('select[multiple]:enabled[name] option:selected', this).each(function() {
+			// We collect all the options that have been selected.
+			fields = fields.concat(this);
+		});
+
+		// Each radio button group will post one parameter.
+		// We assume all checked radio buttons will be posted.
+		fields = fields.concat(
+			$('input:enabled:radio:checked', this)
+				.toArray()
+		);
+
+		// TODO: provide an option to return an array of objects containing the form field names,
+		// types and values, in a form that can be compared to what is actually posted.
+		if (typeof(return_elements) === 'undefined') return_elements = false;
+
+		if (return_elements === true) {
+			// Return the full list of elements for analysis.
+			return fields;
+		} else {
+			// Just return the number of elements matched.
+			return fields.length;
+		}
 	};
 }(jQuery));
 
