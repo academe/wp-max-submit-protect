@@ -52,7 +52,7 @@ be POSTed by the form. Additional settings allow you to modify the confirm box t
 or replace the standard confirm box with something more ambitious, such as a jquery.ui
 dialog. You can target specific forms with different settings if you wish.
 
-From version 1.2.1 you can use the function `maxSubmitCount()` to fetch the count of 
+From version 1.1.0 you can use the function `maxSubmitCount()` to fetch the count of 
 fields without submitting, and `maxSubmitCount(true)` to return all the DOM elements that
 this plugin believes will be posted. There is also `maxSubmitCountTest()` to list
 all the DOM elements in a HTML table for analysis and testing. The demo shows this working
