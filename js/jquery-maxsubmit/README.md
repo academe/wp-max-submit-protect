@@ -28,6 +28,15 @@ will be submitted in a form (it does this, hopefully, intellidently by taking in
 all the form item types and selected values). The plugin is given the maximum number of
 items the server will accept when the page is generated, so it has a number to compare to.
 
+So, can't we just use `$('form :input').length;` to get the number of fields? Well yes you
+can get the number of fields with that selector. What that does not give you, however, are
+the number of fields that will be posted when the form is submitted. Some fields (e.g.
+multi-select) can post multiple values. Some groups of fields (e.g. radio buttons) will post
+only one vaolue per group. Others (e.g. checkboxes) may or may not be posted, depended on
+whether they are checked. Yet others (e.g. textarea) will always be posted regardless of
+what value has been entered. Disabled fields and fields with no name attriobute will also
+not post to the server. In short, it's complicated.
+
 ## Implementation
 
 ### Client-side JavaScript
