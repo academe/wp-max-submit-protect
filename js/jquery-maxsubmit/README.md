@@ -70,7 +70,7 @@ server. It can be found with a simple PHP function like this:
         $ini = array_filter($ini, 'is_numeric');
 
         // Find the smallest of them all.
-        $lowest_limit = min($ini);
+        $lowest_limit = ( ! empty($ini) ? min($ini) : false);
 
         return ($lowest_limit === false ? $default : $lowest_limit);
     }
