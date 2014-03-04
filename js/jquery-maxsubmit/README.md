@@ -32,10 +32,11 @@ So, can't we just use `$('form :input').length;` to get the number of fields? We
 can get the number of fields with that selector. What that does not give you, however, are
 the number of fields that will be posted when the form is submitted. Some fields (e.g.
 multi-select) can post multiple values. Some groups of fields (e.g. radio buttons) will post
-only one vaolue per group. Others (e.g. checkboxes) may or may not be posted, depended on
-whether they are checked. Yet others (e.g. textarea) will always be posted regardless of
-what value has been entered. Disabled fields and fields with no name attriobute will also
-not post to the server. In short, it's complicated.
+only one value for each group of fields. Others (e.g. checkboxes) may or may not be posted, depending
+on whether they are checked. Yet others (e.g. textarea) will always be posted regardless of
+what value has been entered. Disabled fields and fields with no 'name' attribute will also
+not post to the server. In short, it's complicated, and the aim of this plugin is to take
+the guesswork away.
 
 ## Implementation
 
@@ -50,6 +51,12 @@ That will trigger on all forms, and warn the user if more than 1000 values are a
 be POSTed by the form. Additional settings allow you to modify the confirm box text,
 or replace the standard confirm box with something more ambitious, such as a jquery.ui
 dialog. You can target specific forms with different settings if you wish.
+
+From version 1.2.1 you can use the function `maxSubmitCount()` to fetch the count of 
+fields without submitting, and `maxSubmitCount(true)` to return all the DOM elements that
+this plugin believes will be posted. There is also `maxSubmitCountTest()` to list
+all the DOM elements in a HTML table for analysis and testing. The demo shows this working
+now, though it is not fully documented yet.
 
 ### Server-side Code
 
