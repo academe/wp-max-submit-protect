@@ -3,8 +3,8 @@ Contributors: judgej
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B4STZL8F5WHK6
 Tags: woocommerce, forms, data-integrity
 Requires at least: 3.6
-Tested up to: 3.8.1
-Stable tag: 1.1.0
+Tested up to: 4.2.2
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,8 @@ A WooCommerce product with 40 variations can have over 1300 submitted form items
 Luckily [the maximum number of accepted parameters can be changed in php.ini](http://docs.woothemes.com/document/problems-with-large-amounts-of-data-not-saving-variations-rates-etc/)
 The problem is, many site owners have no idea this needs to be done until it is too late and their application,
 for example their WooCommerce store, has lost half its product variations.
+
+If using php.ini on your site, the file needs to be in the /wp-admin directory as that is where the admin forms are submitted to.
 
 To protect yourself and make sure the server limit does not catch
 you unawares, install this plugin and let it run in the background. Each time you try to submit a form in the
@@ -71,13 +73,16 @@ will default to 1000. This is certainly too low for some e-commerce plugins.
 
 == Screenshots ==
 
-1. 
-2. 
+1. An example of the message that appears if you try to submit more POST parameters than the server is able to accept.
 
 == Changelog ==
 
+= Version 1.1.1 =
+* Remove check of suhosin.get.max_vars as we are only interested in POST forms.
+* Change the form selector to limit only to POST forms.
+
 = Version 1.1.0 =
-* Upgraded jquery.maxsubmit.js to 1.2.1 containing some subtantial rewrites
+* Upgraded jquery.maxsubmit.js to 1.2.1 containing some substantial rewrites
 
 = Version 1.0.7 =
 * Upgraded jquery.maxsubmit.js to 1.1.3 to fix HTML5 input field matching

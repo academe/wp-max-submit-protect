@@ -6,7 +6,7 @@
 Plugin Name: WP Max Submit Protect
 Plugin URI: https://github.com/academe/wp-max-submit-protect
 Description: Protect admin forms from being submitted with too many GET or POST parameters, e.g. a WooCommerce variable product with many variations.
-Version: 1.1.0
+Version: 1.1.1
 Author: Academe Computing
 Author URI: http://www.academe.co.uk/
 License: GPLv2 or later
@@ -122,7 +122,6 @@ class WP_Max_Submit_Protect
         // processed. Check them all to find the lowest.
         $ini = array();
         $ini[] = ini_get('max_input_vars');
-        $ini[] = ini_get('suhosin.get.max_vars');
         $ini[] = ini_get('suhosin.post.max_vars');
         $ini[] = ini_get('suhosin.request.max_vars');
 
@@ -177,12 +176,12 @@ class WP_Max_Submit_Protect
             . 'Data may be lost if you submit. Are you sure you want to go ahead?'
         )));
 
-        // Apply the limit checker to all forms on the page.
+        // Apply the limit checker to all POST forms on the page.
         $script = <<<ENDHTML
             <script type="text/javascript">
                 /* Plugin: WP Max Submit Protect */
                 jQuery(document).ready(function($) {
-                    $('form').maxSubmit({
+                    $('form[method*=post]').maxSubmit({
                         max_count: {$this->current_limit},
                         max_exceeded_message: {$too_many_message}
                     });
