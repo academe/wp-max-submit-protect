@@ -167,7 +167,7 @@ class WP_Max_Submit_Protect
      */
     public function wp_head_action()
     {
-        if (true || wp_script_is('jquery.maxsubmit', 'done')) {
+        if (wp_script_is('jquery.maxsubmit', 'done')) {
             // Translate the message the administrator will see if they submit a big form.
             // Also encode it to a JavaScript inline string, except for the newline in the middle.
             // Don't translate any of the {fields}.
@@ -189,15 +189,19 @@ class WP_Max_Submit_Protect
                     })
                 </script>
 ENDHTML;
-
-            // Send the script out to the browser in the head.
-            // Trim each line to keep it shorter.
-            echo implode("\n", array_map('trim', explode("\n", $script)));
         } else {
             // If the enqueued script has not loaded, then don't use it.
             // Other plugins can prevent the main JS from being loaded.
-            return;
+            $script = <<<ENDHTML
+                <script type="text/javascript">
+                    /* Warning: The "WP Max Submit Protect" plugin has been disabled by another plugin. */
+                </script>
+ENDHTML;
         }
+
+        // Send the script out to the browser in the head.
+        // Trim each line to keep it shorter.
+        echo implode("\n", array_map('trim', explode("\n", $script)));
     }
 }
 
