@@ -35,7 +35,7 @@ This plugin has been tested against PHP5.4 but is written to be compatible with 
 
 [https://github.com/academe/wp-max-submit-protect](https://github.com/academe/wp-max-submit-protect)
 
-Note: turning on the Gravity Forms' ""No-Conflict Mode" will disable this plugin. You may have reasons for using that setting, but it will disable most other plugins, some of which may be security-related.
+Note: turning on the Gravity Forms' "No-Conflict Mode" will disable this plugin. You may have reasons for using that setting, but it will disable most other plugins, some of which may be security-related.
 
 Please let me know how this plugin works for you, whether you like it, and how it can be improved.
 
